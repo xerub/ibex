@@ -1,0 +1,14 @@
+# DO NOT DELETE
+
+blob.o: plib.h nand.h blob.h
+link.o: plib.h
+main.o: plib.h nand.h blob.h
+nand.o: plib.h nand.h
+lib/atoi.o: plib.h
+lib/div.o: plib.h
+lib/memcmp.o: plib.h
+lib/memmem.o: plib.h
+lib/memmove.o: plib.h
+lib/memset.o: plib.h
+lib/strcmp.o: plib.h
+lib/xtoi.o: plib.h

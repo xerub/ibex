@@ -1,0 +1,24 @@
+iBoot Payload Development Toolkit
+
+Copyright (c) 2010, 2014-2015 xerub
+Portions Copyright (c) 2015 iH8sn0w
+
+Props: Dev-Team, p0sixninja, westbaer, msft.guy, DarkMalloc et al.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+iPhone 4 7.1.2 (iBoot-1940.10.58):
+==================================
+
+    make [PIE=1] [TARGET=iPhone3,1/11D257/iBoot]
+
+Put device in Recovery mode.
+    ./irecovery -s
+    iRecovery> /send payload
+    iRecovery> ...
