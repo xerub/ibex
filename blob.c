@@ -273,3 +273,52 @@ save_all_blobs(void)
     printf_("Blobs copied at %x - %x\n", get_addr, get_endp);
     return 0;
 }
+
+int
+save_single_image(unsigned int type)
+{
+    unsigned int total;
+    unsigned char *data;
+    struct firmware_image *e;
+    struct img3_root root;
+
+    for (e = ((struct firmware_image *)image_list)->next; e != image_list; e = e->next) {
+        if (e->info.type == type) {
+            printf_("saving image %c%c%c%c\n",
+                (type >> 24) & 0xFF, (type >> 16) & 0xFF, (type >> 8) & 0xFF, type & 0xFF);
+            break;
+        }
+    }
+
+    if (e == image_list) {
+        printf_("image not found\n");
+        return -1;
+    }
+
+    total = bdev_read(e->bdev, &root, e->offset_lo, sizeof(root));
+    if (total != sizeof(root)) {
+        printf_("image read err1\n");
+        return -1;
+    }
+
+    data = malloc_(0x80 + root.size);
+    if (!data) {
+        printf_("out of memory\n");
+        return 0;
+    }
+
+    total = bdev_read(e->bdev, data + 0x80, e->offset_lo, root.size);
+    if (total != root.size) {
+        free_(data);
+        printf_("image read err2\n");
+        return -1;
+    }
+    memcpy(data, data + 0x80 + root.shshOffset + 20 + 12, 0x80);
+    decrypt_shsh(data);
+    total += 0x80;
+
+    get_addr = (unsigned)data;
+    get_endp = get_addr + total;
+    printf_("image copied at %x - %x\n", get_addr, get_endp);
+    return 0;
+}
