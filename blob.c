@@ -146,11 +146,11 @@ save_krnl(void)
         return NULL;
     }
     memcpy(blob->data, addr + root->shshOffset + 20 + 12, 0x80);
-    if (decrypt_shsh(blob->data)) {
+    /*if (decrypt_shsh(blob->data)) {
         printf_("aes err\n");
         free_(blob);
         return NULL;
-    }
+    }*/
     blob->type = 'krnl';
     blob->size = 0x80;
     return blob;
