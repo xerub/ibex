@@ -32,12 +32,13 @@ xtoi(const char *hptr)
         int nibble = *hptr++;
         if (nibble >= '0' && nibble <= '9') {
             nibble -= '0';
-        } else if (nibble >= 'a' && nibble <= 'f') {
-            nibble -= 'a' - 10;
-        } else if (nibble >= 'A' && nibble <= 'F') {
-            nibble -= 'A' - 10;
         } else {
-            break;
+            nibble |= 0x20;
+            if (nibble >= 'a' && nibble <= 'f') {
+                nibble -= 'a' - 10;
+            } else {
+                break;
+            }
         }
         val = (val << 4) | nibble;
     }
