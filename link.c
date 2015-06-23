@@ -268,6 +268,7 @@ MAYBE_UNUSED jumpto_t
 find_jumpto(void)
 {
     const void *ldr;
+    const void *pr;
     const void *bl;
     const void *mm = find_xref("jumping into image at", sizeof("jumping into image at") - 1);
     if (!mm) {
@@ -277,13 +278,16 @@ find_jumpto(void)
     if (!ldr) {
         return NULL;
     }
-    bl = bl_search_down(ldr, 8);
-    if (!bl) {
+    pr = bl_search_down(ldr, 8);
+    if (!pr) {
         return NULL;
     }
-    bl = bl_search_down((char *)bl + 4, 16);
+    bl = bl_search_down((char *)pr + 4, 20);
     if (!bl) {
-        return NULL;
+        bl = bw_search_down((char *)pr + 4, 24);
+        if (!bl) {
+            return NULL;
+        }
     }
     return (jumpto_t)(int)resolve_bl32(bl);
 }
