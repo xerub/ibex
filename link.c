@@ -67,8 +67,11 @@ MAYBE_UNUSED void* bl_search_down(const void* start_addr, int len) {
 }
 
 MAYBE_UNUSED void* blx_search_down(const void* start_addr, int len) {
-	/* BL pattern is xx Ex xx F8+ */
-	return pattern_search(start_addr, len, 0xE000F000, 0xE000F800, 2);
+	return pattern_search(start_addr, len, 0xC000F000, 0xD001F800, 2);
+}
+
+MAYBE_UNUSED void* bw_search_down(const void* start_addr, int len) {
+	return pattern_search(start_addr, len, 0x9000F000, 0xD000F800, 2);
 }
 
 MAYBE_UNUSED void* ldr_search_down(const void* start_addr, int len) {
