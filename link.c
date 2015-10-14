@@ -127,7 +127,7 @@ MAYBE_UNUSED void* ldr_to(const void* loc) {
 MAYBE_UNUSED void* push_lr_search_up(const void* start_addr, int len) {
 	/* F0 B5 <-- PUSH LR */
 	/* F0 BD <-- POP PC */
-	return pattern_search(start_addr, len, 0x0000B580, 0x0000FF80, -1);
+	return pattern_search(start_addr, len, 0x0000B580, 0x0000FF80, -2);
 }
 
 MAYBE_UNUSED void* resolve_bl32(const void* bl) {
