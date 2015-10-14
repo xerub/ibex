@@ -148,6 +148,7 @@ _main(int argc, CmdArg *argv)
                     get_endp = get_addr + 0x1000;
                 }
             }
+            return 0;
         }
 
         if (get_addr < get_endp) {
