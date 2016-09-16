@@ -37,7 +37,7 @@ void *memset(void *dst, int ch, size_t len)
   if (len < 32) while (len--) *dest++ = ch;
   else {
     /* do the front chunk as chars */
-    while ((long)dst & 3) {
+    while ((long)dest & 3) {
       len--;
       *dest++ = ch;
     }
