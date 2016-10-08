@@ -78,7 +78,7 @@ extern free_t free_;
 typedef void *(*memmove_t)(void *dst, const void *src, size_t n);
 extern memmove_t memmove_;
 
-typedef int (*aes_crypto_cmd_t)(int crypt_type, void *inbuf, void *outbuf, unsigned int inbuf_len, unsigned int aes_key_type, char *iv, char *key);
+typedef int (*aes_crypto_cmd_t)(int crypt_type, void *inbuf, void *outbuf, unsigned int inbuf_len, unsigned int aes_key_type, char *key, char *iv);
 extern aes_crypto_cmd_t aes_crypto_cmd_;
 
 typedef void (*enter_critical_section_t)(void);
